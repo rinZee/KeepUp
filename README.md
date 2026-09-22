@@ -35,7 +35,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='https://i.imgboxy.com/5tsblj.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+[Click here to watch the walkthrough](https://i.imgur.com/yourActualGifId.gif)
+
+![Video Walkthrough](https://i.imgur.com/yourActualGifId.gif)
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ... screenToGif
