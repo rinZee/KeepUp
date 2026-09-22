@@ -1,0 +1,13 @@
+{
+  "name": "discover-local-music",
+  "version": "1.0.0",
+  "description": "A listicle web app for finding local music events near campus.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
