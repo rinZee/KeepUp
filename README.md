@@ -1,39 +1,57 @@
-# WEB103 Project 1 - KeepUp (Discover Local Music)
+# WEB103 Project 2 - KeepUp (Discover Local Music)
 
 Submitted by: **Tsheten Sherpa**
 
 About this web app: **A local music event discovery app that lets users browse live shows, filter by genre, and view detailed event information for each listing.**
 
-Time spent: ** 8 hours**
+Time spent: **8 hours**
 
 ## Required Features
 
-The following **required** functionality is completed:
+The following required functionality is implemented:
 
-<!-- Make sure to check off completed functionality below -->
-- [x] **The web app uses only HTML, CSS, and JavaScript without a frontend framework**
-- [x] **The web app displays a title**
-- [x] **The web app displays at least five unique list items, each with at least three displayed attributes (such as title, text, and image)**
-- [x] **The user can click on each item in the list to see a detailed view of it, including all database fields**
-  - [x] **Each detail view should be a unique endpoint, such as as `localhost:3000/bosses/crystalguardian` and `localhost:3000/mantislords`**
-  - [x] *Note: When showing this feature in the video walkthrough, please show the unique URL for each detailed view. We will not be able to give points if we cannot see the implementation* 
-- [x] **The web app serves an appropriate 404 page when no matching route is defined**
-- [x] **The web app is styled using Picocss**
+- [x] The web app uses only HTML, CSS, and JavaScript without a frontend framework.
+- [ ] The web app is connected to a Render PostgreSQL database with a structured `events` table.
+  - [ ] Record the Render dashboard showing the available PostgreSQL database in the walkthrough.
+  - [ ] Show the table contents with `SELECT * FROM events;` in `psql` during the walkthrough.
 
-The following **optional** features are implemented:
+The database connection and schema are implemented, but the Render database must be created and configured before the database requirement can be checked off.
 
-- [x] The web app displays items in a unique format, such as cards rather than lists or animated list items
+## PostgreSQL Setup
 
-The following **additional** features are implemented:
+Install dependencies and create a local environment file:
 
-- [x] Genre filter dropdown for browsing different music styles
-- [x] Detailed event pages with lineup, venue, pricing, and vibes
-- [x] Custom visual styling layered on top of PicoCSS for a more polished presentation
+```powershell
+npm install
+Copy-Item .env.example .env
+```
+
+Create a PostgreSQL database in Render. For local development, fill the `PGDATABASE`, `PGHOST`, `PGPASSWORD`, `PGPORT`, and `PGUSER` values in `.env` using the database's external connection details. Keep `.env` private; it is ignored by Git.
+
+In the Render web service's Environment settings, add those same five variables using the database's internal connection details. The app enables SSL for the PostgreSQL connection. To start locally, run `npm start`; the server listens on port `3000` unless `PORT` is set.
+
+Run the schema and seed script against the Render database using its external connection URL from the Render dashboard:
+
+```powershell
+psql "PASTE_EXTERNAL_DATABASE_URL_HERE" -f src/db/setup.sql
+```
+
+Connect with `psql "PASTE_EXTERNAL_DATABASE_URL_HERE"`, then run `SELECT * FROM events;` to verify the seeded events and capture the required walkthrough evidence. The SQL setup is safe to rerun: event slugs are unique and existing seed rows are updated.
+
+## Optional Features
+
+The following optional functionality is implemented:
+
+- [ ] Users can search for items by a specific attribute.
+
+Additional functionality:
+
+- [x] Genre filtering, unique event detail pages, and a custom 404 page.
 
 ## Video Walkthrough
 
 
-Here's a walkthrough of implemented required features:
+The existing walkthrough shows the app UI. Record a new walkthrough that also shows the Render PostgreSQL database in the dashboard and the result of `SELECT * FROM events;` in `psql` before marking the database requirement complete.
 
 [Click here to watch the walkthrough](https://i.imgboxy.com/5tsblj.gif)
 

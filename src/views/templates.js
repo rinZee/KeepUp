@@ -1,11 +1,8 @@
-const { events } = require('../data/events');
-
-function getUniqueGenres(eventList = events) {
+function getUniqueGenres(eventList) {
   return [...new Set(eventList.map((event) => event.genre))].sort();
 }
 
-function buildHomeMarkup(selectedGenre = 'all', filteredEvents = events) {
-  const genres = getUniqueGenres();
+function buildHomeMarkup(selectedGenre = 'all', filteredEvents = [], genres = getUniqueGenres(filteredEvents)) {
   const eventMarkup = filteredEvents
     .map(
       (event) => `
@@ -168,9 +165,32 @@ function buildNotFoundPage() {
     </html>`;
 }
 
+function buildDatabaseErrorPage() {
+  return `<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Events Temporarily Unavailable</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+        <link rel="stylesheet" href="/css/styles.css" />
+      </head>
+      <body>
+        <main class="container not-found-box">
+          <div class="missing-card">
+            <h2>Events temporarily unavailable</h2>
+            <p>We could not connect to the event database. Please try again shortly.</p>
+            <a href="/" class="button-link">Try again</a>
+          </div>
+        </main>
+      </body>
+    </html>`;
+}
+
 module.exports = {
   buildHomeMarkup,
   buildDetailMarkup,
   buildNotFoundPage,
+  buildDatabaseErrorPage,
   getUniqueGenres
 };
