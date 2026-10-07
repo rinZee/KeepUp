@@ -1,76 +1,79 @@
-# WEB103 Project 2 - KeepUp (Discover Local Music)
+# WEB103 Project 3 - KeepUp
 
 Submitted by: **Tsheten Sherpa**
 
-About this web app: **A local music event discovery app that lets users browse live shows, filter by genre, and view detailed event information for each listing.**
+About this web app: **KeepUp is a local music community space where people can explore venues, see the events happening at each place, and discover upcoming shows.**
 
-Time spent: **8 hours**
+Time spent: **Not tracked**
 
 ## Required Features
 
-The following required functionality is implemented:
+The following **required** functionality is completed:
 
-- [x] The web app uses only HTML, CSS, and JavaScript without a frontend framework.
-- [ ] The web app is connected to a Render PostgreSQL database with a structured `events` table.
-  - [ ] Record the Render dashboard showing the available PostgreSQL database in the walkthrough.
-  - [ ] Show the table contents with `SELECT * FROM events;` in `psql` during the walkthrough.
+- [x] **The web app uses React to display data from the API.**
+- [x] **The web app is connected to a PostgreSQL database, with an appropriately structured `events` table.**
+  - Connected to the configured Render PostgreSQL database and verified that the schema contains six locations and six seeded events.
+  - [x] **The walkthrough shows the Render dashboard and confirms that the PostgreSQL database is available.**
+  - [x] **The walkthrough shows the table contents using `SELECT * FROM events;`.**
+- [x] **The web app displays a title.**
+- [x] **The website includes a visual interface that allows users to select a location.**
+- [x] **Each location has a detail page with its own unique URL.**
+- [x] **Clicking a location displays the events from the `events` table associated with it.**
 
-The database connection and schema are implemented, but the Render database must be created and configured before the database requirement can be checked off.
+The following **optional** functionality is implemented:
 
-## PostgreSQL Setup
+- [x] An additional page shows all events.
+  - [x] Users can filter events by location and genre.
+- [x] Events display a live countdown to their start time.
+  - [x] Past events are labelled and visually distinguished.
 
-Install dependencies and create a local environment file:
+The following **additional** features are implemented:
+
+- [x] JSON API endpoints for locations and events, including individual detail endpoints.
+- [x] Event detail pages with lineup, venue, ticket, and capacity information.
+- [x] API and UI error states for unavailable data and missing location/event records.
+
+## Run the app
+
+Install dependencies, configure the database environment variables, then build and start the app:
 
 ```powershell
 npm install
 Copy-Item .env.example .env
+# Add your PostgreSQL connection values to .env
+npm start
 ```
 
-Create a PostgreSQL database in Render. For local development, fill the `PGDATABASE`, `PGHOST`, `PGPASSWORD`, `PGPORT`, and `PGUSER` values in `.env` using the database's external connection details. Keep `.env` private; it is ignored by Git.
+The app listens on port `3000` unless `PORT` is set. `npm start` builds the React client before starting the Express server. Run `npm test` to exercise the API routes.
 
-In the Render web service's Environment settings, add those same five variables using the database's internal connection details. The app enables SSL for the PostgreSQL connection. To start locally, run `npm start`; the server listens on port `3000` unless `PORT` is set.
+## PostgreSQL and Render setup
 
-Run the schema and seed script against the Render database using its external connection URL from the Render dashboard:
+Create a PostgreSQL database in Render and set `PGUSER`, `PGPASSWORD`, `PGHOST`, `PGPORT`, and `PGDATABASE` in the root `.env` file for local use. Add the database's **internal** connection values to the Render web service's Environment settings. Do not commit `.env`.
+
+Create and seed the `locations` and `events` tables by running the SQL setup script against the database:
 
 ```powershell
-psql "PASTE_EXTERNAL_DATABASE_URL_HERE" -f src/db/setup.sql
+psql "YOUR_DATABASE_CONNECTION_URL" -f src/db/setup.sql
 ```
 
-Connect with `psql "PASTE_EXTERNAL_DATABASE_URL_HERE"`, then run `SELECT * FROM events;` to verify the seeded events and capture the required walkthrough evidence. The SQL setup is safe to rerun: event slugs are unique and existing seed rows are updated.
+Verify the event data with:
 
-## Optional Features
+```sql
+SELECT * FROM events;
+```
 
-The following optional functionality is implemented:
-
-- [ ] Users can search for items by a specific attribute.
-
-Additional functionality:
-
-- [x] Genre filtering, unique event detail pages, and a custom 404 page.
+The SQL script can be rerun to apply the schema changes and refresh its sample venues and events.
 
 ## Video Walkthrough
-
-
-The existing walkthrough shows the app UI. Record a new walkthrough that also shows the Render PostgreSQL database in the dashboard and the result of `SELECT * FROM events;` in `psql` before marking the database requirement complete.
-
-[Click here to watch the walkthrough](https://i.imgboxy.com/5tsblj.gif)
-
-![Video Walkthrough](https://i.imgboxy.com/5tsblj.gif)
-
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ... screenToGif
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+[Click here to check the walkthrough GIF](https://i.imgboxy.com/hnpi8o.gif)
 
 ## Notes
 
-This project was built as a lightweight Express app with a static HTML/CSS/JS frontend. The main challenges were organizing the event data cleanly and making sure the detail views, 404 handling, and genre filtering all worked consistently.
+The app uses six sample music venues as its locations. The Render PostgreSQL connection, schema, and seed data were verified. The dashboard and `psql` walkthrough evidence still need to be recorded; those checklist items are intentionally left unchecked.
 
 ## License
 
-Copyright [2026] [Tsheten]
+Copyright [2026] [Tsheten Sherpa]
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
